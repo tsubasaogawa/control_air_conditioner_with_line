@@ -2,8 +2,13 @@
 
 require('./phpMQTT/phpMQTT.php');
 
-$mqtt = new phpMQTT("example.com", 1883, "phpMQTT Sub Example");
-if(!$mqtt->connect()){
+$json = file_get_contents('./secrets.json');
+$secrets = json_decode($json, true);
+$broker = $secrets['broker'];
+$client = $secrets['client'];
+
+$mqtt = new phpMQTT($broker['host'], $broker['port'], $client['name']);
+if(!$mqtt->connect(true, null, $client['user'], $client['pass'])){
   exit(1);
 }
 $topics['ogawatest'] = array("qos"=>0, "function"=>"procmsg");
