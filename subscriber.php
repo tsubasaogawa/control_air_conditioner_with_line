@@ -3,7 +3,7 @@
 require('./phpMQTT/phpMQTT.php');
 require('./init.php');
 
-$mqtt = new phpMQTT($broker['host'], $broker['port'], $client['name']);
+$mqtt = new phpMQTT($broker['host'], $broker['port'], 'subscriber');
 if(!$mqtt->connect(true, null, $client['user'], $client['pass'])){
   exit(1);
 }
