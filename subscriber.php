@@ -1,11 +1,7 @@
 <?php
 
 require('./phpMQTT/phpMQTT.php');
-
-$json = file_get_contents('./secrets.json');
-$secrets = json_decode($json, true);
-$broker = $secrets['broker'];
-$client = $secrets['client'];
+require('./init.php');
 
 $mqtt = new phpMQTT($broker['host'], $broker['port'], $client['name']);
 if(!$mqtt->connect(true, null, $client['user'], $client['pass'])){
