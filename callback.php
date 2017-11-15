@@ -1,9 +1,13 @@
 <?php
 
-class Controller_Calloga extends Controller_Rest {
+require('./publisher.php');
+
+class Controller_callback extends Controller_Rest {
+  private $publisher;
+
   public function __construct($val) {
     parent::__construct($val);
-    Log::info('constructor start');
+    $this->publisher = new Publisher();
   }
   
   public function post_index() {
@@ -11,6 +15,7 @@ class Controller_Calloga extends Controller_Rest {
     $form = Input::json();
     # result -> resolvedQuery: Inputted text by user
     var_dump($form['result']['resolvedQuery']);
+    $this->publisher->send_mqtt('topic', 'msg'); #FIXME
   }
 
   public function get_index() {
