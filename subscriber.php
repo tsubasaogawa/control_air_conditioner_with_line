@@ -1,7 +1,7 @@
 <?php
 
-require('./phpMQTT/phpMQTT.php');
-require('./init.php');
+require(dirname(__FILE__) . '/phpMQTT/phpMQTT.php');
+require(dirname(__FILE__) . '/init.php');
 
 $mqtt = new phpMQTT($broker['host'], $broker['port'], 'subscriber');
 if(! $mqtt->connect(true, null, $client['user'], $client['pass'])) {
